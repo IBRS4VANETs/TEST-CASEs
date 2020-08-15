@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def pltbar(n_groups, bar_width, data, labels):
+def pltbar(n_groups, bar_width, data, labels, xlabels):
     
     
     fig, ax = plt.subplots()
@@ -29,11 +29,11 @@ def pltbar(n_groups, bar_width, data, labels):
     
     ax.set_ylabel('TEST')
     ax.set_xticks([index[x] + 0.5 * bar_width for x in range(n_groups)])
-    ax.set_xticklabels(('A', 'B', 'C'))
+    ax.set_xticklabels(xlabels)
     ax.legend()
     
     fig.tight_layout()
-    plt.show()    
+    plt.show()
 
 def pltpoly():
     pass
