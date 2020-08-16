@@ -1,8 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def pltbar(n_groups, bar_width, data, labels, xlabels):
-    
+def pltbar(n_groups, bar_width, data, labels, xlabels, ytext):
+    """
+    :n_groups: number of samples
+    """
     
     fig, ax = plt.subplots()
     index = np.arange(n_groups)
@@ -10,8 +12,8 @@ def pltbar(n_groups, bar_width, data, labels, xlabels):
     
     count = 0
     rects = []
-    hatchs = ['', '', '', '///', '\\\\']
-    presetColor = ['#111111', '#AAAFAA', '#44444F', '#FFFFFF', '#CCCCCF']
+    hatchs = ['///', '', '\\\\',  '']
+    presetColor = ['#FFFFFF', '#CCCCCF', '#AAAFAA', '#111111', '#44444F']
     
     for item in data:
         for x,y in zip(index + count * bar_width, item):
@@ -19,18 +21,18 @@ def pltbar(n_groups, bar_width, data, labels, xlabels):
                 continue
             plt.text(x, y + 0.02, y, ha = 'center', va = 'bottom', fontsize = 9)
         
-        ax.bar(index + count * bar_width, item, bar_width - 0.05,
+        ax.bar(index + count * bar_width, item, bar_width - 0.1,
                            alpha = opacity,
                            color = presetColor[count],
                            edgecolor = '#000000',
-                           hatch = hatchs[count],
-                           label = labels[count])
+                           label = labels[count],
+                           hatch = hatchs[count])
         count += 1
     
-    ax.set_ylabel('TEST')
-    ax.set_xticks([index[x] + 0.5 * bar_width for x in range(n_groups)])
+    ax.set_ylabel(ytext)
+    ax.set_xticks([x + 0.5 * bar_width for x in range(n_groups + 1)])
     ax.set_xticklabels(xlabels)
-    ax.legend()
+    ax.legend(loc=7)
     
     fig.tight_layout()
     plt.show()
