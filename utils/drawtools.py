@@ -37,7 +37,7 @@ def pltbar(n_groups, bar_width, data, labels, xlabels, ytext, lposition, xtext):
     fig.tight_layout()
     plt.show()   
 
-def pltpoly(n_groups, data, labels, xlabels, ytext, lposition, xtext):
+def pltpoly(n_groups, data, labels, xlabels, ytext, lposition, xtext, show_num = True):
     """
     :n_groups: sample size
     """    
@@ -50,10 +50,11 @@ def pltpoly(n_groups, data, labels, xlabels, ytext, lposition, xtext):
     
     
     for item in data:
-        for x,y in zip(index, item):
-            if y == 0:
-                continue
-            plt.text(x, y + 0.4, y, ha = 'center', va = 'bottom', fontsize = 9)
+        if show_num:
+            for x,y in zip(index, item):
+                if y == 0:
+                    continue
+                plt.text(x, y + 0.4, y, ha = 'center', va = 'bottom', fontsize = 9)
         ax.plot(index, 
                 item,
                 linestyle = '-',
