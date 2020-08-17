@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def pltbar(n_groups, bar_width, data, labels, xlabels, ytext, lposition, xtext):
+def pltbar(n_groups, bar_width, data, labels, xlabels, ytext, lposition, xtext, title):
     """
     :n_groups: number of samples
     """
@@ -36,8 +36,9 @@ def pltbar(n_groups, bar_width, data, labels, xlabels, ytext, lposition, xtext):
     
     fig.tight_layout()
     plt.show()   
+    fig.savefig('./illustration/' + title + '.pdf')
 
-def pltpoly(n_groups, data, labels, xlabels, ytext, lposition, xtext, show_num = True):
+def pltpoly(n_groups, data, labels, xlabels, ytext, lposition, xtext, title, show_num = True):
     """
     :n_groups: sample size
     """    
@@ -75,3 +76,4 @@ def pltpoly(n_groups, data, labels, xlabels, ytext, lposition, xtext, show_num =
     
     fig.tight_layout()
     plt.show()
+    fig.savefig('./illustration/' + title + '.pdf')
