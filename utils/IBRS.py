@@ -181,8 +181,23 @@ class OBU():
     result = dotprod(1, -1, sign_num, lam_func, sigma[0], L, h)
     return (pair(result, self.mpk2) == pair(sigma[1], self.Q))
 
-  def batchV(self, CtList):
-    pass
+  def batchV(self, SigmaList):
+
+    part1 = []
+    part2 = []
+
+    for index, item in enumerate(SigmaList):
+      [U, V], m, ring = item
+      part2.append(V)
+      lt = ''.join([bytes.decode(self.group.serialize(i)) for i in ring])
+      h = []
+      for u_i in U:
+        h.append(self.group.hash((m, lt, u_i), ZR))
+      lam_func = lambda i,a,b,c: a[i] + (b[i] * c[i])
+      part1.append(dotprod(1, -1, len(ring), lam_func, U, ring, h))
+    left = dotprod(1, -1, len(part1), lambda i, a: a[i], part1)
+    right = dotprod(1, -1, len(part2), lambda i, a: a[i], part2)
+    return (pair(left, self.mpk2) == pair(right, self.Q))
 
 class RSU():
   """docstring for RSU
@@ -237,20 +252,6 @@ class RSU():
         dataStream.append(Package(pid, 'You are blocked', flags[index]))
 
     return dataStream
-
-  # def i2v(self, Ctext, kunodes):
-  #   U = Ctext[0]
-  #   V = Ctext[1]
-  #   # print(Ctext)
-  #   # print("e(U, rsk) ===> ",pair(U, self.sk))
-  #   pseuID = self.group.deserialize( int2Bytes( V ^ integer(self.group.serialize(pair(U, self.sk)))))
-  #   symKey = hashlib.sha256(self.group.serialize(pair(pseuID, self.sk))).digest()
-  #   cipherRuner = AuthenticatedCryptoAbstraction(symKey)
-  #   pathList = json.loads(cipherRuner.decrypt(Ctext[2]))
-  #   pathValue = [int(x) for x in pathList]
-  #   if set(pathValue) & kunodes:
-  #     return True # non-revoked
-  #   return False
 
 if __name__ == '__main__':
   debug = True
