@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Jupyter-lab config
+jupyterhub_config.py
+
 # C extensions
 *.so
 
