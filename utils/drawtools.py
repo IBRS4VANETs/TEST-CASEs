@@ -36,7 +36,7 @@ def pltbar(n_groups, bar_width, data, labels, xlabels, ytext, lposition, xtext, 
     
     fig.tight_layout()
     plt.show()   
-    fig.savefig('./illustration/' + title + '.pdf')
+    fig.savefig('./illustration/' + title + '.pdf', pad_inches=0.0, bbox_inches='tight')
 
 def pltpoly(n_groups, data, labels, xlabels, ytext, lposition, xtext, title, show_num = True, ylim = False):
     """
@@ -78,4 +78,4 @@ def pltpoly(n_groups, data, labels, xlabels, ytext, lposition, xtext, title, sho
     
     fig.tight_layout()
     plt.show()
-    fig.savefig('./illustration/' + title + '.pdf')
+    fig.savefig('./illustration/' + title + '.pdf', pad_inches=0.0, bbox_inches='tight')
