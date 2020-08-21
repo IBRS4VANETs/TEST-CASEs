@@ -30,6 +30,7 @@ def pltbar(n_groups, bar_width, data, labels, xlabels, ytext, lposition, xtext, 
     
     ax.set_ylabel(ytext)
     ax.set_xticks([(x + 0.25) * bar_width for x in np.arange(n_groups)])
+#     ax.set_xticks([(x) * bar_width for x in np.arange(n_groups)])
     ax.set_xticklabels(xlabels)
     ax.legend(loc=lposition)
     ax.set_xlabel(xtext)
